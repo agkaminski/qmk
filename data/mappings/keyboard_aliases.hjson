@@ -2258,5 +2258,8 @@
     },
     "zsa/planck_ez": {
         "target": "zsa/planck_ez/base"
+    },
+    "nuphy/kick75": {
+        "target": "nuphy/kick75/ansi"
     }
 }
