@@ -21,14 +21,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DYNAMIC_KEYMAP_MACRO_DELAY  8
 #define EECONFIG_USER_DATA_SIZE     8
 
-#define DEV_MODE_PIN               C0  
-#define SYS_MODE_PIN               C1 
-#define DC_BOOST_PIN               C2 
-#define NRF_RESET_PIN              B4 
-#define NRF_BOOT_PIN               B5  
-#define NRF_WAKEUP_PIN             C4 
-#define RGB_DRIVER_SDB1            C6  
-#define RGB_DRIVER_SDB2            C7  
+#define DEV_MODE_PIN               C0
+#define SYS_MODE_PIN               C1
+#define DC_BOOST_PIN               C2
+#define NRF_RESET_PIN              B4
+#define NRF_BOOT_PIN               B5
+#define NRF_WAKEUP_PIN             C4
+#define RGB_DRIVER_SDB1            C6
+#define RGB_DRIVER_SDB2            C7
 
 #define SERIAL_DRIVER              SD1
 #define SD1_TX_PIN                 B6
@@ -43,8 +43,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 0b1110111 AD <-> VCC
 // 0b1110101 AD <-> SCL
 // 0b1110110 AD <-> SDA
-#define DRIVER_ADDR_1              0b1010000
-#define DRIVER_ADDR_2              0b1010011
+#define IS31FL3733_I2C_ADDRESS_1   0b1010000
+#define IS31FL3733_I2C_ADDRESS_2   0b1010011
 
 #define ISSI_TIMEOUT               1
 
@@ -63,11 +63,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define I2C1_TIMINGR_SCLL          0U
 #define I2C1_DUTY_CYCLE            FAST_DUTY_CYCLE_16_9
 
-#define DRIVER_COUNT               2
+#define IS31FL3733_DRIVER_COUNT    2
 #define DRIVER_1_LED_TOTAL         48
 #define DRIVER_2_LED_TOTAL         (32 + 5)
 #define RGB_MATRIX_LED_COUNT       (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
-#define RGB_MATRIX_DEFAULT_MODE    RGB_MATRIX_CYCLE_LEFT_RIGHT  
+#define RGB_MATRIX_DEFAULT_MODE    RGB_MATRIX_CYCLE_LEFT_RIGHT
 #define RGB_MATRIX_SLEEP
 
