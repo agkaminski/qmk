@@ -111,7 +111,7 @@ void light_level_control(uint8_t brighten)
             side_light--;
     }
     user_config.ee_side_light = side_light;
-    eeconfig_update_user_datablock(&user_config);
+    eeconfig_update_user_datablock(&user_config, 0, EECONFIG_USER_DATA_SIZE);
 }
 
 /**
@@ -130,7 +130,7 @@ void light_speed_control(uint8_t fast)
         if ((side_speed) < LIGHT_SPEED_MAX) side_speed++;
     }
     user_config.ee_side_speed = side_speed;
-    eeconfig_update_user_datablock(&user_config);
+    eeconfig_update_user_datablock(&user_config, 0, EECONFIG_USER_DATA_SIZE);
 }
 
 /**
@@ -172,7 +172,7 @@ void side_colour_control(uint8_t dir)
     }
     user_config.ee_side_rgb    = side_rgb;
     user_config.ee_side_colour = side_colour;
-    eeconfig_update_user_datablock(&user_config);
+    eeconfig_update_user_datablock(&user_config, 0, EECONFIG_USER_DATA_SIZE);
 }
 
 /**
@@ -196,7 +196,7 @@ void side_mode_control(uint8_t dir)
     }
     side_play_point          = 0;
     user_config.ee_side_mode = side_mode;
-    eeconfig_update_user_datablock(&user_config);
+    eeconfig_update_user_datablock(&user_config, 0, EECONFIG_USER_DATA_SIZE);
 }
 
 /**
@@ -467,7 +467,7 @@ static void side_static_mode_show(void)
 
         count_rgb_light(side_light_table[side_light]);
 
-        rgb_matrix_set_color(side_led_index_tab[i], r_temp, g_temp, b_temp); 
+        rgb_matrix_set_color(side_led_index_tab[i], r_temp, g_temp, b_temp);
     }
 }
 
@@ -709,7 +709,7 @@ void device_reset_init(void)
     user_config.ee_side_rgb             = side_rgb;
     user_config.ee_side_colour          = side_colour;
     user_config.sleep_enable            = true;
-    eeconfig_update_user_datablock(&user_config);
+    eeconfig_update_user_datablock(&user_config, 0, EECONFIG_USER_DATA_SIZE);
 }
 
 /**

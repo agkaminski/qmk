@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DEV_RESET_PRESS_DELAY 30
 #define RGB_TEST_PRESS_DELAY  30
 
-user_config_t user_config; 
+user_config_t user_config;
 DEV_INFO_STRUCT dev_info =
 {
     .rf_baterry = 100,
@@ -32,37 +32,37 @@ DEV_INFO_STRUCT dev_info =
     .rf_state   = RF_IDLE,
 };
 
-bool f_uart_ack         = 0; 
-bool f_bat_show         = 0;  
-bool f_bat_hold         = 0;  
-bool f_dev_sleep_enable = 1; 
-bool f_chg_show         = 1;  
-bool f_sys_show         = 0; 
-bool f_sleep_show       = 0; 
-bool f_func_save        = 0;  
-bool f_rf_read_data_ok  = 0;  
-bool f_rf_sts_sysc_ok   = 0; 
-bool f_rf_new_adv_ok    = 0;  
-bool f_rf_reset         = 0;  
-bool f_send_channel     = 0;  
-bool f_rf_hand_ok       = 0;  
-bool f_dial_sw_init_ok  = 0;  
-bool f_goto_sleep       = 0; 
-bool f_wakeup_prepare   = 0; 
-bool f_rf_sw_press      = 0;  
-bool f_dev_reset_press  = 0;  
-bool f_rgb_test_press   = 0;  
+bool f_uart_ack         = 0;
+bool f_bat_show         = 0;
+bool f_bat_hold         = 0;
+bool f_dev_sleep_enable = 1;
+bool f_chg_show         = 1;
+bool f_sys_show         = 0;
+bool f_sleep_show       = 0;
+bool f_func_save        = 0;
+bool f_rf_read_data_ok  = 0;
+bool f_rf_sts_sysc_ok   = 0;
+bool f_rf_new_adv_ok    = 0;
+bool f_rf_reset         = 0;
+bool f_send_channel     = 0;
+bool f_rf_hand_ok       = 0;
+bool f_dial_sw_init_ok  = 0;
+bool f_goto_sleep       = 0;
+bool f_wakeup_prepare   = 0;
+bool f_rf_sw_press      = 0;
+bool f_dev_reset_press  = 0;
+bool f_rgb_test_press   = 0;
 bool f_bat_num_show     = 0;
 
 uint8_t host_mode;
 host_driver_t *m_host_driver   = 0;
-uint16_t rf_linking_time       = 0;   
-uint16_t rf_link_show_time     = 0; 
-uint8_t rf_blink_cnt           = 0;       
-uint16_t no_act_time           = 0;       
-uint16_t dev_reset_press_delay = 0;  
-uint16_t rf_sw_press_delay     = 0;  
-uint16_t rgb_test_press_delay  = 0;  
+uint16_t rf_linking_time       = 0;
+uint16_t rf_link_show_time     = 0;
+uint8_t rf_blink_cnt           = 0;
+uint16_t no_act_time           = 0;
+uint16_t dev_reset_press_delay = 0;
+uint16_t rf_sw_press_delay     = 0;
+uint16_t rgb_test_press_delay  = 0;
 uint8_t rf_sw_temp             = 0;
 
 void rf_uart_init(void);
@@ -79,25 +79,19 @@ void device_reset_show(void);
 void device_reset_init(void);
 void rgb_test_show(void);
 
-extern uint8_t side_mode;    
-extern uint8_t side_light;  
-extern uint8_t side_speed;  
-extern uint8_t side_rgb;    
-extern uint8_t side_colour;  
-extern report_keyboard_t *keyboard_report;
-extern report_nkro_t *nkro_report;
+extern uint8_t side_mode;
+extern uint8_t side_light;
+extern uint8_t side_speed;
+extern uint8_t side_rgb;
+extern uint8_t side_colour;
 extern uint8_t uart_bit_report_buf[32];
 extern uint8_t bitkb_report_buf[32];
 extern uint8_t bytekb_report_buf[8];
 
-extern void eeconfig_update_user_datablock(const void *data);
 extern void light_speed_control(uint8_t fast);
 extern void light_level_control(uint8_t brighten);
 extern void side_colour_control(uint8_t dir);
 extern void side_mode_control(uint8_t dir);
-extern void num_led_show(void);
-
-
 
 
 /**
@@ -146,7 +140,7 @@ void long_press_key(void)
             while (timeout--) {
                 uart_send_cmd(CMD_NEW_ADV, 0, 1);
                 wait_ms(20);
-                uart_receive_pro();                   
+                uart_receive_pro();
                 if (f_rf_new_adv_ok) break;
             }
         }
@@ -157,7 +151,7 @@ void long_press_key(void)
     if (f_dev_reset_press) {
         dev_reset_press_delay++;
         if (dev_reset_press_delay >= DEV_RESET_PRESS_DELAY)  {
-            f_dev_reset_press = 0;                 
+            f_dev_reset_press = 0;
 
             if (dev_info.link_mode != LINK_USB) {
                 if (dev_info.link_mode != LINK_RF_24) {
@@ -174,14 +168,14 @@ void long_press_key(void)
             wait_ms(500);
             uart_send_cmd(CMD_CLR_DEVICE, 10, 10);
 
-            eeconfig_init();      
-            device_reset_show();  
-            device_reset_init();  
+            eeconfig_init();
+            device_reset_show();
+            device_reset_init();
 
             if (dev_info.sys_sw_state == SYS_SW_MAC) {
-                default_layer_set(1 << 0);  
+                default_layer_set(1 << 0);
             } else {
-                default_layer_set(1 << 2);  
+                default_layer_set(1 << 2);
             }
         }
     } else {
@@ -192,7 +186,7 @@ void long_press_key(void)
         rgb_test_press_delay++;
         if (rgb_test_press_delay >= RGB_TEST_PRESS_DELAY) {
             f_rgb_test_press = 0;
-            rgb_test_show(); 
+            rgb_test_show();
         }
     } else {
         rgb_test_press_delay = 0;
@@ -205,7 +199,7 @@ void long_press_key(void)
 void m_break_all_key(void)
 {
     uint8_t report_buf[16];
-    bool nkro_temp = keymap_config.nkro; 
+    bool nkro_temp = keymap_config.nkro;
 
     clear_weak_mods();
     clear_mods();
@@ -243,20 +237,20 @@ void m_break_all_key(void)
 static void switch_dev_link(uint8_t mode)
 {
     if (mode > LINK_USB) return;
-    m_break_all_key();    
+    m_break_all_key();
 
-    dev_info.link_mode = mode; 
+    dev_info.link_mode = mode;
     dev_info.rf_state = RF_IDLE;
     f_send_channel = 1;
 
     if (mode == LINK_USB) {
-        host_mode = HOST_USB_TYPE;    
-        host_set_driver(m_host_driver); 
-        rf_link_show_time = 0;        
+        host_mode = HOST_USB_TYPE;
+        host_set_driver(m_host_driver);
+        rf_link_show_time = 0;
     }
     else {
-        host_mode = HOST_RF_TYPE; 
-        host_set_driver(&rf_host_driver);           
+        host_mode = HOST_RF_TYPE;
+        host_set_driver(&rf_host_driver);
 
     }
 }
@@ -284,14 +278,14 @@ void dial_sw_scan(void)
     if (readPin(SYS_MODE_PIN)) dial_scan |= 0X02;
 
     if (dial_save != dial_scan) {
-        m_break_all_key(); 
+        m_break_all_key();
 
-        no_act_time     = 0;  
-        rf_linking_time = 0; 
+        no_act_time     = 0;
+        rf_linking_time = 0;
 
         dial_save         = dial_scan;
-        debounce          = 25;  
-        f_dial_sw_init_ok = 0;  
+        debounce          = 25;
+        f_dial_sw_init_ok = 0;
         return;
     } else if (debounce) {
         debounce--;
@@ -311,23 +305,23 @@ void dial_sw_scan(void)
     if (dial_scan & 0x02) {
         if (dev_info.sys_sw_state != SYS_SW_MAC) {
             f_sys_show = 1;
-            default_layer_set(1 << 0);  
+            default_layer_set(1 << 0);
             dev_info.sys_sw_state = SYS_SW_MAC;
-            keymap_config.nkro    = 0; 
-            m_break_all_key();        
+            keymap_config.nkro    = 0;
+            m_break_all_key();
         }
     } else {
         if (dev_info.sys_sw_state != SYS_SW_WIN) {
             f_sys_show = 1;
-            default_layer_set(1 << 2);  
+            default_layer_set(1 << 2);
             dev_info.sys_sw_state = SYS_SW_WIN;
-            keymap_config.nkro    = 1;  
-            m_break_all_key();        
+            keymap_config.nkro    = 1;
+            m_break_all_key();
         }
     }
 
     if (f_dial_sw_init_ok == 0) {
-        f_dial_sw_init_ok = 1; 
+        f_dial_sw_init_ok = 1;
         flag_power_on     = false;
 
         if (dev_info.link_mode != LINK_USB) {
@@ -347,8 +341,8 @@ void m_power_on_dial_sw_scan(void)
     uint8_t dial_check_sys = 0;
     uint8_t debounce = 0;
 
-    setPinInputHigh(DEV_MODE_PIN);      
-    setPinInputHigh(SYS_MODE_PIN);     
+    setPinInputHigh(DEV_MODE_PIN);
+    setPinInputHigh(SYS_MODE_PIN);
 
     for(debounce=0; debounce<10; debounce++) {
         dial_scan_dev = 0;
@@ -378,17 +372,17 @@ void m_power_on_dial_sw_scan(void)
 
     if (dial_scan_sys) {
         if (dev_info.sys_sw_state != SYS_SW_MAC) {
-            default_layer_set(1 << 0);  
+            default_layer_set(1 << 0);
             dev_info.sys_sw_state = SYS_SW_MAC;
-            keymap_config.nkro    = 0; 
-            m_break_all_key();  
+            keymap_config.nkro    = 0;
+            m_break_all_key();
         }
     } else {
         if (dev_info.sys_sw_state != SYS_SW_WIN) {
-            default_layer_set(1 << 2);  
+            default_layer_set(1 << 2);
             dev_info.sys_sw_state = SYS_SW_WIN;
-            keymap_config.nkro    = 1; 
-            m_break_all_key();     
+            keymap_config.nkro    = 1;
+            m_break_all_key();
         }
     }
 }
@@ -405,7 +399,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
         case RF_DFU:
             if (record->event.pressed) {
                 if (dev_info.link_mode != LINK_USB) return false;
-                uart_send_cmd(CMD_RF_DFU, 10, 20); 
+                uart_send_cmd(CMD_RF_DFU, 10, 20);
             }
             return false;
 
@@ -608,7 +602,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
         case DEV_RESET:
             if (record->event.pressed) {
                 f_dev_reset_press = 1;
-                m_break_all_key(); 
+                m_break_all_key();
             } else {
                 f_dev_reset_press = 0;
             }
@@ -619,7 +613,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 if(user_config.sleep_enable) user_config.sleep_enable = false;
                 else user_config.sleep_enable = true;
                 f_sleep_show       = 1;
-                eeconfig_update_user_datablock(&user_config);
+                eeconfig_update_user_datablock(&user_config, 0, EECONFIG_USER_DATA_SIZE);
             }
             return false;
 
@@ -662,7 +656,7 @@ void timer_pro(void)
     } else if (timer_elapsed32(interval_timer) > 20) {
         interval_timer = timer_read32();
     } else {
-        interval_timer += 10; 
+        interval_timer += 10;
     }
 
     if (rf_link_show_time < RF_LINK_SHOW_TIME)
@@ -681,9 +675,9 @@ void timer_pro(void)
  */
 void m_londing_eeprom_data(void)
 {
-    eeconfig_read_user_datablock(&user_config);
+    eeconfig_read_user_datablock(&user_config, 0, EECONFIG_USER_DATA_SIZE);
     if (user_config.default_brightness_flag != 0xA5) {
-        rgb_matrix_sethsv(255, 255, RGB_MATRIX_MAXIMUM_BRIGHTNESS - RGB_MATRIX_VAL_STEP * 2); 
+        rgb_matrix_sethsv(255, 255, RGB_MATRIX_MAXIMUM_BRIGHTNESS - RGB_MATRIX_VAL_STEP * 2);
         user_config.default_brightness_flag = 0xA5;
         user_config.ee_side_mode            = side_mode;
         user_config.ee_side_light           = side_light;
@@ -691,7 +685,7 @@ void m_londing_eeprom_data(void)
         user_config.ee_side_rgb             = side_rgb;
         user_config.ee_side_colour          = side_colour;
         user_config.sleep_enable            = true;
-        eeconfig_update_user_datablock(&user_config);  
+        eeconfig_update_user_datablock(&user_config, 0, EECONFIG_USER_DATA_SIZE);
     } else {
         side_mode   = user_config.ee_side_mode;
         side_light  = user_config.ee_side_light;
@@ -702,19 +696,19 @@ void m_londing_eeprom_data(void)
 }
 
 
-/** 
+/**
  *   qmk keyboard post init
  */
 void keyboard_post_init_kb(void)
 {
-    m_gpio_init(); 
-    rf_uart_init();               
-    wait_ms(500);             
-    rf_device_init();           
+    m_gpio_init();
+    rf_uart_init();
+    wait_ms(500);
+    rf_device_init();
 
-    m_break_all_key();           
-    m_londing_eeprom_data();    
-    m_power_on_dial_sw_scan();  
+    m_break_all_key();
+    m_londing_eeprom_data();
+    m_power_on_dial_sw_scan();
     keyboard_post_init_user();
 }
 
