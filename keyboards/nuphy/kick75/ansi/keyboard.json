@@ -12,7 +12,6 @@
         "mousekey": true,
         "extrakey": true,
         "console": true,
-        "command": false,
         "nkro": true,
         "key_lock": true,
         "encoder": true,
@@ -23,7 +22,6 @@
     "dynamic_keymap": {
         "layer_count": 8
     },
-    "debounce": 0,
     "matrix_pins": {
         "cols": ["A4", "A5", "A6", "A7", "B0", "B1", "B10", "B11", "B12", "B13", "B14", "B15", "A8", "A9", "A10", "A15", "B3"],
         "rows": ["C14", "C15", "A0", "A1", "A2", "A3"]
@@ -38,7 +36,6 @@
     "rgb_matrix": {
         "driver": "is31fl3733",
         "center_point": [70, 20],
-        "max_brightness": 255,
         "val_steps": 64,
         "speed_steps": 52,
         "animations": {
