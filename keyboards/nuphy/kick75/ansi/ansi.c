@@ -818,18 +818,11 @@ bool rgb_matrix_indicators_kb(void)
 void housekeeping_task_kb(void)
 {
     timer_pro();
-
     uart_receive_pro();
-
     uart_send_report_func();
-
     dev_sts_sync();
-
     long_press_key();
-
     dial_sw_scan();
-
     m_side_led_show();
-
     Sleep_Handle();
 }
