@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
 // layer Mac
 [0] = LAYOUT(
     KC_ESC, 	KC_BRID,  	KC_BRIU,  	MAC_TASK, 	MAC_SEARCH, MAC_VOICE,  MAC_DND,  	KC_MPRV,  	KC_MPLY,  	KC_MNXT, 	KC_MUTE, 	KC_VOLD, 	KC_VOLU, 	KC_DEL, 	KC_MUTE,
@@ -83,3 +82,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,                _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
     _______,    _______,    _______,                                        _______,                            _______,    _______,                _______,    _______,    _______),
 };
+
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+    [0] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [1] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [2] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [3] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [4] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [5] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [6] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [7] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU) }
+};
+#endif
