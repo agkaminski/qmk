@@ -119,7 +119,6 @@ void uart_send_report_func(void)
     static uint32_t interval_timer = 0;
 
     if (dev_info.link_mode == LINK_USB) return;
-    keyboard_protocol          = 1;
 
     if (timer_elapsed32(interval_timer) > 50) {
         interval_timer = timer_read32();
@@ -195,7 +194,7 @@ void RF_Protocol_Receive(void) {
         sync_lost = 0;
 
         if (Usart_Mgr.RXDLen > 4) {
-            if((Usart_Mgr.RXDLen - 5) != RX_LEN) 
+            if((Usart_Mgr.RXDLen - 5) != RX_LEN)
                 return;
 
             for (i = 0; i < RX_LEN; i++)
@@ -389,7 +388,7 @@ uint8_t uart_send_cmd(uint8_t cmd, uint8_t wait_ack, uint8_t delayms) {
         case CMD_SET_24G_NAME: {
             Usart_Mgr.TXDBuf[3]  = 40;          // uart data len
             Usart_Mgr.TXDBuf[4]  = 40;          // name valid len
-            Usart_Mgr.TXDBuf[5]  = 3;           
+            Usart_Mgr.TXDBuf[5]  = 3;
             Usart_Mgr.TXDBuf[6]  = 'N';
             Usart_Mgr.TXDBuf[8]  = 'u';
             Usart_Mgr.TXDBuf[10] = 'P';
@@ -533,22 +532,22 @@ void UART_Send_Bytes(uint8_t *Buffer, uint32_t Length) {
         {
             writePinLow(NRF_WAKEUP_PIN);
             wait_us(50);
-        
+
             uart_transmit(Buffer, Length);
-        
+
             wait_us(50 + Length * 32);
-            writePinHigh(NRF_WAKEUP_PIN);  
-        
-            wait_us(200);      
-        }        
+            writePinHigh(NRF_WAKEUP_PIN);
+
+            wait_us(200);
+        }
     } else {
             writePinLow(NRF_WAKEUP_PIN);
             wait_us(50);
-        
+
             uart_transmit(Buffer, Length);
-        
+
             wait_us(50 + Length * 32);
-            writePinHigh(NRF_WAKEUP_PIN);          
+            writePinHigh(NRF_WAKEUP_PIN);
     }
 }
 
